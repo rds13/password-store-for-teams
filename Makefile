@@ -8,8 +8,7 @@ help:
 import-and-sign: ## Import in GPG all keys from the list of allowed keys
 	$(foreach var,$(shell find . -name .gpg-id | xargs cat | sort | uniq), \
 		( \
-			gpg --list-public-key $(var) || \
-			gpg --keyserver hkp://keyserver.ubuntu.com --search-keys 0x$(var); \
+			gpg --list-public-key $(var) \
 		) && \
 		gpg --sign-key $(var); \
 	)
